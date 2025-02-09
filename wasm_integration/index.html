@@ -9,24 +9,13 @@
 
 <body>
     <h1>Fibonacci</h1>
-    <input type="number" id="input" placeholder="Enter a number">
-    <button onclick="calculate()">Calculate</button>
+    <form action="" onsubmit="e=>calculate(e)">
+        <input type="number" id="input" placeholder="Enter a number">
+        <button type="submit">Calculate</button>
+    </form>
     <p>Result: <span id="result"></span></p>
 
-    <script>
-        (async () => {
-            try {
-                const wasm = await import("./pkg/wasm_integration.js");
-
-                window.calculate = function () {
-                    let n = parseInt(document.getElementById("input").value);
-                    document.getElementById("result").innerText = wasm.fibonacci(n);
-                };
-            } catch (err) {
-                console.log("An error has occured; ", err)
-            }
-        })();
-    </script>
+    <script type="module" src="./script.js"></script>
 </body>
 
 </html>
