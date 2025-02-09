@@ -1,3 +1,4 @@
+use concurrent_tasks::async_task;
 use std::error::Error;
 use tokio::{
     join,
@@ -5,21 +6,8 @@ use tokio::{
 };
 use tracing::{error, info};
 
-async fn async_task(id: usize) -> Result<(), Box<dyn Error + Send + Sync>> {
-    let sleep_time = Duration::from_secs(2);
-    sleep(sleep_time).await;
-
-    if id % 3 == 0 {
-        error!("Task number {} failed!", id);
-        return Err(format!("Critical error in task {}", id).into());
-    }
-
-    info!("Task number {} has completed successfully!", id);
-    Ok(())
-}
-
 #[tokio::main]
-async fn main() {
+pub async fn main() {
     tracing_subscriber::fmt::init();
 
     let (res1, res2, res3, res4, res5) = join!(
