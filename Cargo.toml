@@ -1,0 +1,2 @@
+[workspace]
+members = [ "concurrent_tasks","wasm_integration"]
